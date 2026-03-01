@@ -1,0 +1,38 @@
+//Arquivo para estilos globais
+
+//RESET
+*{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: "Mouse Memoirs", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    letter-spacing: 1px;
+    -webkit-tap-highlight-color: transparent; /* Remove highlight azul em todos os elementos */
+    animation: fadeIn 1.2s ease-out;
+}
+
+a{
+	text-decoration: none;
+	cursor: pointer;
+}
+li{
+	list-style-type: none;
+}
+
+body {
+    background-color: #545252;
+}
+
+
+/* ANIMAÇÕES */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+//VARIAVEIS
+
+
+//MIXINS
