@@ -1,56 +1,61 @@
 import { useState, useEffect } from "react";
-import styles from "./ListaLancamentos.module.scss";
+import styles from "./ListaAdicionados.module.scss";
 
-const API_KEY = "d8d845616ef648907b00e45d63d0584f"; 
+const API_KEY = "d8d845616ef648907b00e45d63d0584f";
 const BASE_URL = "https://api.themoviedb.org/3";
 
-function ListaLancamentos() {
+function ListaAdicionados() {
   const [animacoes, setAnimacoes] = useState([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const fetchAnimacoes = async () => {
+    const fetchUltimos = async () => {
       try {
-        // Animações em cartaz (filmes) + airing today (séries)
+        // Filmes e séries animação ORDENADAS por data de lançamento (mais novas primeiro)
         const [filmesRes, seriesRes] = await Promise.all([
           fetch(
-            `${BASE_URL}/discover/movie?api_key=${API_KEY}&with_genres=16&language=pt-BR`
+            `${BASE_URL}/discover/movie?api_key=${API_KEY}` +
+            `&with_genres=16` +
+            `&sort_by=release_date.desc` +  // 🎯 MAIS NOVAS PRIMEIRO
+            `&language=pt-BR`
           ),
           fetch(
-            `${BASE_URL}/discover/tv?api_key=${API_KEY}&with_genres=16&language=pt-BR`
+            `${BASE_URL}/discover/tv?api_key=${API_KEY}` +
+            `&with_genres=16` +
+            `&sort_by=first_air_date.desc` +  // Séries usam first_air_date
+            `&language=pt-BR`
           )
         ]);
 
         const filmes = await filmesRes.json();
         const series = await seriesRes.json();
 
-        // Junta filmes e séries ordenado por popularidade
         const todasAnimacoes = [
           ...filmes.results,
           ...series.results
-        ].sort((a, b) => b.popularity - a.popularity)
-         .slice(0, 30); // Top 10
+        ].slice(0, 30);
 
         setAnimacoes(todasAnimacoes);
       } catch (error) {
-        console.error("Erro ao buscar animações:", error);
+        console.error("Erro ao buscar últimos:", error);
       } finally {
         setLoading(false);
       }
     };
 
-    fetchAnimacoes();
+    fetchUltimos();
   }, []);
 
   if (loading) {
-    return <section className={styles.listaLancamentos}>Carregando...</section>;
+    return <section className={styles.lista}>Carregando...</section>;
   }
 
   return (
-    <section className={styles.listaLancamentos}>
+    <section className={styles.lista}>
       {animacoes.map((animacao) => (
         <a 
           key={animacao.id} 
+          href={`https://www.themoviedb.org/${animacao.media_type || 'movie'}/${animacao.id}`}
           className={styles.cardlink}
           target="_blank"
           rel="noopener noreferrer"
@@ -59,7 +64,7 @@ function ListaLancamentos() {
             src={
               animacao.poster_path
                 ? `https://image.tmdb.org/t/p/w500${animacao.poster_path}`
-                : "/placeholder.jpg" 
+                : "/placeholder.jpg"
             } 
             className={styles.imgCard}
             alt={animacao.title || animacao.name}
@@ -78,4 +83,4 @@ function ListaLancamentos() {
   );
 }
 
-export default ListaLancamentos;
+export default ListaAdicionados;

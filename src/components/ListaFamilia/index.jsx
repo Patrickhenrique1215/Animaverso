@@ -1,56 +1,56 @@
 import { useState, useEffect } from "react";
-import styles from "./ListaLancamentos.module.scss";
+import styles from "./ListaFamilia.module.scss";
 
-const API_KEY = "d8d845616ef648907b00e45d63d0584f"; 
+const API_KEY = "d8d845616ef648907b00e45d63d0584f";
 const BASE_URL = "https://api.themoviedb.org/3";
 
-function ListaLancamentos() {
-  const [animacoes, setAnimacoes] = useState([]);
+function ListaFamilia() {
+  const [animacoesFamilia, setAnimacoesFamilia] = useState([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const fetchAnimacoes = async () => {
+    const fetchAnimacoesFamilia = async () => {
       try {
-        // Animações em cartaz (filmes) + airing today (séries)
+        // Filmes e séries de animação da Familia
         const [filmesRes, seriesRes] = await Promise.all([
           fetch(
-            `${BASE_URL}/discover/movie?api_key=${API_KEY}&with_genres=16&language=pt-BR`
+            `${BASE_URL}/discover/movie?api_key=${API_KEY}&with_genres=16,10751&sort_by=popularity.desc&language=pt-BR`
           ),
           fetch(
-            `${BASE_URL}/discover/tv?api_key=${API_KEY}&with_genres=16&language=pt-BR`
+            `${BASE_URL}/discover/tv?api_key=${API_KEY}&with_genres=16,10751&sort_by=popularity.desc&language=pt-BR`
           )
         ]);
 
         const filmes = await filmesRes.json();
         const series = await seriesRes.json();
 
-        // Junta filmes e séries ordenado por popularidade
-        const todasAnimacoes = [
+        // Junta e pega top 20 mais populares
+        const todasAnimacoesFamilia = [
           ...filmes.results,
           ...series.results
-        ].sort((a, b) => b.popularity - a.popularity)
-         .slice(0, 30); // Top 10
+        ].slice(0, 30);
 
-        setAnimacoes(todasAnimacoes);
+        setAnimacoesFamilia(todasAnimacoesFamilia);
       } catch (error) {
-        console.error("Erro ao buscar animações:", error);
+        console.error("Erro ao buscar animações da Familia:", error);
       } finally {
         setLoading(false);
       }
     };
 
-    fetchAnimacoes();
+    fetchAnimacoesFamilia();
   }, []);
 
   if (loading) {
-    return <section className={styles.listaLancamentos}>Carregando...</section>;
+    return <section className={styles.listaFamilia}>Carregando...</section>;
   }
 
   return (
-    <section className={styles.listaLancamentos}>
-      {animacoes.map((animacao) => (
+    <section className={styles.listaFamilia}>
+      {animacoesFamilia.map((animacao) => (
         <a 
           key={animacao.id} 
+          href={`https://www.themoviedb.org/${animacao.media_type || 'movie'}/${animacao.id}`}
           className={styles.cardlink}
           target="_blank"
           rel="noopener noreferrer"
@@ -59,7 +59,7 @@ function ListaLancamentos() {
             src={
               animacao.poster_path
                 ? `https://image.tmdb.org/t/p/w500${animacao.poster_path}`
-                : "/placeholder.jpg" 
+                : "/placeholder.jpg"
             } 
             className={styles.imgCard}
             alt={animacao.title || animacao.name}
@@ -69,7 +69,7 @@ function ListaLancamentos() {
               {animacao.title || animacao.name}
             </h2>
             <p className={styles.descriptionCard}>
-              {animacao.overview.slice(0, 100)}...
+              {animacao.overview ? animacao.overview.slice(0, 100) + "..." : ""}
             </p>
           </div>
         </a>
@@ -78,4 +78,5 @@ function ListaLancamentos() {
   );
 }
 
-export default ListaLancamentos;
+export default ListaFamilia;
+

@@ -10,7 +10,6 @@
     font-style: normal;
     letter-spacing: 1px;
     -webkit-tap-highlight-color: transparent; /* Remove highlight azul em todos os elementos */
-    animation: fadeIn 1.2s ease-out;
 }
 
 a{
@@ -25,6 +24,9 @@ body {
     background-color: #545252;
 }
 
+h2{
+    animation: fadeIn 1.2s ease-out;
+}
 
 /* ANIMAÇÕES */
 @keyframes fadeIn {
@@ -36,3 +38,45 @@ body {
 
 
 //MIXINS
+
+@mixin listas{
+    display: flex;
+    gap: 0.3rem;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    animation: fadeIn 1.2s ease-out;
+
+    &::-webkit-scrollbar {
+        display: none;
+    }
+
+    .imgCard{
+        width: 29vw;
+        border-radius: 4px;
+        box-shadow: 0 3px 12px rgba(0,0,0,0.12);
+        transition: 0.25s ease;
+        cursor: pointer;
+        object-position: center;
+
+        &:hover{
+            transform: scale(1.03);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.18);
+        }
+
+        @media(min-width: 768px){
+            width: 10vw;
+
+            &:hover{
+                transform: scale(1.05);
+            }
+        }
+
+    }
+
+    .footerCard{
+        display: none;
+    }
+
+}
