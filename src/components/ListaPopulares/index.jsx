@@ -47,32 +47,32 @@ function ListaPopulares() {
 
   return (
     <section className={styles.listaPopulares}>
-      {animacoes.map((animacao) => (
-        <a 
-          key={animacao.id} 
-          href={`https://www.themoviedb.org/${animacao.media_type || 'movie'}/${animacao.id}`}
-          className={styles.cardlink}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <img 
-            src={
-              animacao.poster_path
-                ? `https://image.tmdb.org/t/p/w500${animacao.poster_path}`
-                : "/placeholder.jpg"
-            } 
-            className={styles.imgCard}
-            alt={animacao.title || animacao.name}
-          />
-          <div className={styles.footerCard}>
-            <h2 className={styles.titleCard}>
-              {animacao.title || animacao.name}
-            </h2>
-            <p className={styles.descriptionCard}>
-              {animacao.overview.slice(0, 100)}...
-            </p>
-          </div>
-        </a>
+      {animacoes.filter(animacao => animacao.poster_path).map((animacao) => (
+        <a
+                  key={animacao.id}
+                  className={styles.cardlink}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <img 
+                    src={`https://image.tmdb.org/t/p/w500${animacao.poster_path}`}
+                    className={styles.imgCard}
+                    alt={animacao.title || animacao.name}
+                  />
+                  <div className={styles.hoverCard} >
+                    <div className={styles.topoHoverCard}>
+                      <h3>
+                        {animacao.title || animacao.name}
+                      </h3>
+                      <p className={styles.notaHover}> ★ {animacao.vote_average?.toFixed(1)}</p>
+                    </div>
+                    <div className={styles.botoesHoverCard}> 
+                                  <button className={styles.buttonPlay} title="Assistir agora!"><img src="../../../public/play-button.png"/></button>
+                                  <button className={styles.buttonAddAssistirDepois} title="Adicionar em Assistir Depois"><img src="../../../public/adicionar.png"/></button>
+                                  <button className={styles.buttonDetalhes} title={`Ver mais informações sobre ${animacao.title || animacao.name}`}><img src="../../../public/angle-down-solid.png" /></button>
+                                </div>
+                  </div>
+                </a>
       ))}
     </section>
   );
