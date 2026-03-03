@@ -1,17 +1,30 @@
+import { useState } from "react";
 import Header from "./components/Header";
 import AreaListas from "./components/AreaListas";
 import Footer from "./components/Footer";
-
+import ResultadosBusca from "./components/ResultadosBusca";
 
 function App() {
 
+  const [busca, setBusca] = useState("");
+  const [resultados, setResultados] = useState([]);
+
   return (
-    <>
-      <Header/>
-      <AreaListas/>
+    <div className="app">
+      <Header 
+        setBusca={setBusca} 
+        setResultados={setResultados}
+      />
+
+      {busca && resultados.length > 0 ? (
+        <ResultadosBusca resultados={resultados} />
+      ) : (
+        <AreaListas />
+      )}
+
       <Footer />
-    </>
-  )
+    </div>
+  );
 }
 
 export default App;

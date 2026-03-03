@@ -1,15 +1,12 @@
-.areaListas{
-    width: 100%;
+@use "../../index" as *;
+
+.areaBuscados{
     padding-left: 0.8rem;
-    margin-bottom: 5rem;
-    display: flex;
-    flex-direction: column;
-    gap: 0.8rem;
-    
+    margin-bottom: 10vh;
 
     h2{
         color: #b0d1f7;
-        font-size: 1.8rem;
+        font-size: 2rem;
         margin-bottom: 0.5rem;
         display: flex;
 
@@ -26,5 +23,13 @@
         padding-left: 2rem;
     }
 
-    
+    .areaCardsPesquisados{
+        display: flex;
+        flex-wrap: wrap;
+        gap: 1rem;
+
+        @include listas;
+    }
+
 }
+

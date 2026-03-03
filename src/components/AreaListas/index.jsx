@@ -18,59 +18,59 @@ function AreaListas(){
     return(
         <section className={styles.areaListas}>
             <div>
-                <h2>Lançamentos</h2>
+                <h2><hr/> Lançamentos</h2>
                 <ListaLancamentos />
             </div>
             <div>
-                <h2>Populares</h2>
+                <h2><hr/> Populares</h2>
                 <ListaPopulares />
             </div>
             <div>
-                <h2>Disney</h2>
+                <h2><hr/> Disney</h2>
                 <ListaDisney />
             </div>
             <div>
-                <h2>Pixar</h2>
+                <h2><hr/> Pixar</h2>
                 <ListaPixar />
             </div>
             <div>
-                <h2>Família</h2>
+                <h2><hr/> Família</h2>
                 <ListaFamilia />
             </div>
             <div>
-                <h2>Ação</h2>
+                <h2><hr/> Ação</h2>
                 <ListaAcao />
             </div>
             <div>
-                <h2>DC</h2>
+                <h2><hr/> DC</h2>
                 <ListaDC />
             </div>
             <div>
-                <h2>Marvel</h2>
+                <h2><hr/> Marvel</h2>
                 <ListaMarvel />
             </div>
             <div>
-                <h2>Comédia</h2>
+                <h2><hr/> Comédia</h2>
                 <ListaComedia />
             </div>
             <div>
-                <h2>Aventura</h2>
+                <h2><hr/> Aventura</h2>
                 <ListaAventura />
             </div>
             <div>
-                <h2>Fantasia</h2>
+                <h2><hr/> Fantasia</h2>
                 <ListaFantasia />
             </div>
             <div>
-                <h2>Ficção Científica</h2>
+                <h2><hr/> Ficção Científica</h2>
                 <ListaFiccao />
             </div>
             <div>
-                <h2>Adultos (classificação +16)</h2>
+                <h2><hr/> Adultos (classificação +16)</h2>
                 <ListaAdultos />
             </div>
             <div>
-                <h2>Últimos adicionados</h2>
+                <h2><hr/> Últimos adicionados</h2>
                 <ListaAdicionados />
             </div>
         </section>
