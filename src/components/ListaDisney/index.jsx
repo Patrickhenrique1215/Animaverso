@@ -67,9 +67,9 @@ function ListaDisney() {
                       <p className={styles.notaHover}> ★ {animacao.vote_average?.toFixed(1)}</p>
                     </div>
                     <div className={styles.botoesHoverCard}> 
-                                  <button className={styles.buttonPlay} title="Assistir agora!"><img src="../../../public/play-button.png"/></button>
-                                  <button className={styles.buttonAddAssistirDepois} title="Adicionar em Assistir Depois"><img src="../../../public/adicionar.png"/></button>
-                                  <button className={styles.buttonDetalhes} title={`Ver mais informações sobre ${animacao.title || animacao.name}`}><img src="../../../public/angle-down-solid.png" /></button>
+                                  <button className={styles.buttonPlay} title="Assistir agora!"><img src="/play-button.png"/></button>
+                                  <button className={styles.buttonAddAssistirDepois} title="Adicionar em Assistir Depois"><img src="/adicionar.png"/></button>
+                                  <button className={styles.buttonDetalhes} title={`Ver mais informações sobre ${animacao.title || animacao.name}`}><img src="/angle-down-solid.png" /></button>
                                 </div>
                   </div>
                 </a>
