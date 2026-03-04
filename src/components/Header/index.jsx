@@ -29,6 +29,57 @@ const filtrados = dados.results.filter(item =>
     return (
         <header className={styles.header}>
             <img src="/logosemfundo.png" alt="Animaverso" />
+            <ul>
+                <li className={styles.dropdown}>
+                    <a>Categorias</a>
+                    <svg className={styles.svgcategorias} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M12 16l-6-6h12l-6 6z"/>
+                    </svg>
+                    <ul className={styles.dropdownContent}>
+
+                        <li className={styles.sectionDropdown}>
+                            <h4>Público</h4>
+                            <ul>
+                                <li><a href="#">Para todas as idades</a></li>
+                                <li><a href="#">Baby (-5)</a></li>
+                                <li><a href="#">Infantil (+5)</a></li>
+                                <li><a href="#">Adolescente (+12)</a></li>
+                                <li><a href="#">Adulto (+16)</a></li>
+                            </ul>
+                        </li>
+                    
+                        <li className={styles.sectionDropdown}>
+                            <h4>Gêneros</h4>
+                            <ul>
+                                <li><a href="#">Família</a></li>
+                                <li><a href="#">Comédia</a></li>
+                                <li><a href="#">Aventura</a></li>
+                                <li><a href="#">Drama</a></li>
+                                <li><a href="#">Ação</a></li>
+                                <li><a href="#">Fantasia</a></li>
+                                <li><a href="#">Romance</a></li>
+                                <li><a href="#">Mistério</a></li>
+                                <li><a href="#">Horror</a></li>
+                            </ul>
+                        </li>
+                        
+                        <li className={styles.sectionDropdown}>
+                            <h4>Classificação indicativa</h4>
+                            <ul>
+                                <li><a href="#">L</a></li>
+                                <li><a href="#">10</a></li>
+                                <li><a href="#">12</a></li>
+                                <li><a href="#">14</a></li>
+                                <li><a href="#">16</a></li>
+                                <li><a href="#">18</a></li>
+                            </ul>
+                        </li>
+                        
+                        
+                    
+                    </ul>
+                </li>
+            </ul>
 
             <nav>
                 <input

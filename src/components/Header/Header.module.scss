@@ -6,7 +6,7 @@
     z-index: 10;
     display: flex;
     align-items: center;
-    
+    justify-content: space-between;
 
     img{
         width: 20vw;
@@ -18,28 +18,129 @@
         }
     }
 
-    nav{
-        display: flex;
-        justify-content: flex-end;
-        gap: 2rem;
-        width: 80vw;
-        margin-right: 20px;
+    ul{
+        border: 1px solid rgba(164, 164, 175, 0.5);
+        border-radius: 0.4rem;
+        padding: 0 0.5rem;
 
         @media(min-width: 768px){
-            width: 93%;
-            gap: 4rem;
-            margin-right: 4rem;
+            margin-left: auto;
+            margin-right: 3rem;
         }
 
+        .dropdown{
+            display: flex;
+            align-items: center;
+
+            a{
+                color: white;
+                user-select: none;
+                transition: transform 0.3s ease;
+
+                &:hover{
+                    transform: scale(1.1);
+                }
+            }
+
+            svg{
+                color: white;
+                width: 2rem;
+            }
+
+            .dropdownContent{
+                display: flex;
+                justify-content: space-between;
+                gap: 0.5rem;
+                position: absolute;
+                left: 20px;
+                right: 20px;
+                top: 58px;
+                background-color: #FDD313;
+                background-image: linear-gradient(to right,
+                    #f38a34 18%,
+                    #d9b30c 59%,
+                    #f38a34 100%);
+                max-height: 0;
+                overflow: hidden;
+                visibility: hidden;    
+                transition: max-height 0.8s ease;
+
+                @media(min-width:768px){
+                    left: 45vw;
+                    right: auto;
+                    width: 35vw;    
+                }
+                
+                .sectionDropdown{
+                    display: flex;
+                    flex-direction: column;
+                    gap: 0.5rem;
+
+                    h4{
+                        padding-left: 0.4rem;
+                        font-size: 1.1rem;
+                        box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+                        height: 45px;
+                        border-left: 1px solid rgba(0,0,0, 0.2);
+                        display: flex;
+                        align-items: center;
+                        user-select: none;
+                        
+                    }
+
+                    ul{
+                        display: flex;
+                        flex-direction: column;
+                        padding: 0.4rem;
+                        gap: 1.8rem;
+                        border: none;
+
+                        li{
+                            border-bottom: 1px solid rgba(0, 0, 0, 0.4);
+                            transition: transform 0.3s ease;
+
+                            &:hover{
+                                transform: scale(1.05);
+                                border-bottom: 1px solid rgba(0,0,0,0.8);
+                            }
+                            
+                            a{
+                                color: #e8e9f0;
+                                font-size: 1.2rem;
+                            }
+                        }
+                        
+                    }
+                }    
+            }
+
+            &:hover .dropdownContent{
+                max-height: 800px;
+                visibility: visible;
+            }
+        }
+    }
+
+    nav{
+        width: 35vw;
+        margin-right: 0.8rem;
+        
+        input{
+            border: none;
+        }
+        
         input[type="text"]{
             padding: 0.2rem 0.5rem ;
-            width: 50vw;
+            width: 100%;
             border-radius: 0.4rem;
             height: 2rem;
 
-            @media (min-width: 768px){
-                width: 25vw;
-            }
+        }
+
+        @media(min-width: 768px){
+            width: 30%;
+            gap: 4rem;
+            margin-right: 4rem;
         }
 
     }
