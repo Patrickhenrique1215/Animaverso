@@ -21,8 +21,12 @@ li{
 }
 
 body {
-    background-color: #545252;
-
+  background: 
+    linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)),
+    url("/back.png");
+    
+  background-size: cover;
+  background-position: center;
 }
 
 h2{
@@ -60,6 +64,7 @@ html, body{
     scrollbar-width: none;
     -ms-overflow-style: none;
     animation: fadeIn 1.2s ease-out;
+    padding: 10px;
 
     &::-webkit-scrollbar {
         display: none;
@@ -75,6 +80,7 @@ html, body{
         flex: 0 0 auto;
         width: clamp(120px, 38vw, 160px);
         aspect-ratio: 2 / 3;
+        box-shadow: -3px -3px 5px rgb(112, 108, 108);
 
         &:hover{
             transform: scale(1.03);
@@ -163,9 +169,52 @@ html, body{
         opacity: 1;
     }
 
-    
-    
+
 
 }
 
 
+@mixin btncards{
+    position: absolute;
+    top: 55.5%;
+    height: 81%;
+    transform: translateY(-50%);
+    color: white;
+    font-size: 1.4rem;
+    border: none;
+    padding: 30px;
+    cursor: pointer;
+    z-index: 10;
+    display: none;
+    transition: 0.2s ease;
+
+    &:hover{
+        padding: 40px;
+    }
+
+    &.left {
+        left: 0;
+        background: linear-gradient(to right, black, black 10%, rgba(0,0,0,0.5) 90%, transparent);
+        transition: 0.2s ease;
+
+        &:hover{
+            background: linear-gradient(to right, black, black 20%, rgba(0,0,0,0.6) 90%, transparent);
+        }
+    }
+
+    &.right {
+        right: 0;
+        background: linear-gradient(to left, black, black 10%, rgba(0,0,0,0.5) 90%, transparent);
+        transition: 0.2s ease;
+        
+        &:hover{
+            background: linear-gradient(to left, black, black 20%, rgba(0,0,0,0.6) 90%, transparent);
+        }
+    }
+
+    @media(min-width: 992px){
+        display: block
+    }
+
+
+}

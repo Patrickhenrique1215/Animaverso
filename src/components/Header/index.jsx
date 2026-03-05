@@ -28,8 +28,8 @@ const filtrados = dados.results.filter(item =>
 
     return (
         <header className={styles.header}>
-            <img src="/logosemfundo.png" alt="Animaverso" />
-            <ul>
+            <a className={styles.linklogo} href=""><img src="/logosemfundo.png" alt="Animaverso" /></a>
+            <ul className={styles.ul1}>
                 <li className={styles.dropdown}>
                     <a>Categorias</a>
                     <svg className={styles.svgcategorias} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
@@ -39,7 +39,7 @@ const filtrados = dados.results.filter(item =>
 
                         <li className={styles.sectionDropdown}>
                             <h4>Público</h4>
-                            <ul>
+                            <ul className={styles.ul3}>
                                 <li><a href="#">Para todas as idades</a></li>
                                 <li><a href="#">Baby (-5)</a></li>
                                 <li><a href="#">Infantil (+5)</a></li>
@@ -50,7 +50,7 @@ const filtrados = dados.results.filter(item =>
                     
                         <li className={styles.sectionDropdown}>
                             <h4>Gêneros</h4>
-                            <ul>
+                            <ul className={styles.ul3}>
                                 <li><a href="#">Família</a></li>
                                 <li><a href="#">Comédia</a></li>
                                 <li><a href="#">Aventura</a></li>
@@ -65,7 +65,7 @@ const filtrados = dados.results.filter(item =>
                         
                         <li className={styles.sectionDropdown}>
                             <h4>Classificação indicativa</h4>
-                            <ul>
+                            <ul className={styles.ul3}>
                                 <li><a href="#">L</a></li>
                                 <li><a href="#">10</a></li>
                                 <li><a href="#">12</a></li>

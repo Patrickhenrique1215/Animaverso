@@ -8,17 +8,22 @@
     align-items: center;
     justify-content: space-between;
 
-    img{
+    .linklogo{
         width: 20vw;
         margin-left: 0.8rem;
+
+        img{
+            width: 100%;
+        }
 
         @media(min-width: 768px){
             width: 7%;
             margin-left: 2rem;
         }
+        
     }
 
-    ul{
+    .ul1{
         border: 1px solid rgba(164, 164, 175, 0.5);
         border-radius: 0.4rem;
         padding: 0 0.5rem;
@@ -50,25 +55,28 @@
             .dropdownContent{
                 display: flex;
                 justify-content: space-between;
-                gap: 0.5rem;
+                gap: 1.5rem;
                 position: absolute;
                 left: 20px;
                 right: 20px;
                 top: 58px;
-                background-color: #FDD313;
-                background-image: linear-gradient(to right,
-                    #f38a34 18%,
-                    #d9b30c 59%,
-                    #f38a34 100%);
+                background: 
+                    linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)),
+                    url("/back.png");
+                background-size: cover;
+                background-position: center;
                 max-height: 0;
                 overflow: hidden;
                 visibility: hidden;    
                 transition: max-height 0.8s ease;
+                border: 5px solid black;
 
                 @media(min-width:768px){
                     left: 45vw;
                     right: auto;
-                    width: 35vw;    
+                    top: 62px;
+                    width: 35vw;  
+                    gap: 2rem;  
                 }
                 
                 .sectionDropdown{
@@ -77,31 +85,34 @@
                     gap: 0.5rem;
 
                     h4{
+                        color: white;
                         padding-left: 0.4rem;
-                        font-size: 1.1rem;
-                        box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+                        font-size: 1.3rem;
+                        box-shadow: 0px 4px 10px rgba(233, 224, 224, 0.1);
                         height: 45px;
-                        border-left: 1px solid rgba(0,0,0, 0.2);
+                        border-left: 2px solid rgba(234, 227, 227, 1);
+                        border-bottom: 2px solid rgba(234, 227, 227, 1);
                         display: flex;
                         align-items: center;
                         user-select: none;
+                        background-color: black;
                         
                     }
 
-                    ul{
+                    .ul3{
                         display: flex;
                         flex-direction: column;
                         padding: 0.4rem;
                         gap: 1.8rem;
-                        border: none;
 
                         li{
-                            border-bottom: 1px solid rgba(0, 0, 0, 0.4);
+                            border-bottom: 1px solid rgba(225, 220, 220, 0.4);
                             transition: transform 0.3s ease;
 
                             &:hover{
                                 transform: scale(1.05);
-                                border-bottom: 1px solid rgba(0,0,0,0.8);
+                                border-bottom: 1px solid rgba(225,220,220, 1);
+                                box-shadow: -1px -1px 1px white;
                             }
                             
                             a{

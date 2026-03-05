@@ -1,18 +1,26 @@
 .areaListas{
     width: 100%;
-    padding-left: 0.8rem;
     margin-bottom: 5rem;
     display: flex;
     flex-direction: column;
     gap: 0.8rem;
     
+    > div{
+        position: relative;
+        
+    }
 
     h2{
         color: #b0d1f7;
         font-size: 1.8rem;
         margin-bottom: 0.5rem;
+        margin-left: 0.6rem;
         display: flex;
+        background: linear-gradient(to right, black, black 40%, transparent 70%, transparent 100%);
 
+        @media(min-width: 768px){
+            background: linear-gradient(to right, black, black 10%, transparent 30%, transparent 100%);
+        }
         hr{
             width: 4px;
             color: yellow;
@@ -22,9 +30,6 @@
         }
     }
 
-    @media(min-width: 768px){
-        padding-left: 2rem;
-    }
-
+    
     
 }

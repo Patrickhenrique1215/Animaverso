@@ -1,5 +1,9 @@
 @use "../../index" as *;
 
+.scrollBtn{
+   @include btncards;
+}
+
 .listaPopulares{
     @include listas;
 }

@@ -5,7 +5,6 @@ import Footer from "./components/Footer";
 import ResultadosBusca from "./components/ResultadosBusca";
 
 function App() {
-
   const [busca, setBusca] = useState("");
   const [resultados, setResultados] = useState([]);
 
@@ -16,7 +15,7 @@ function App() {
         setResultados={setResultados}
       />
 
-      {busca && resultados.length > 0 ? (
+      {busca ? (  // ← SÓ verifica se FEZ BUSCA
         <ResultadosBusca resultados={resultados} />
       ) : (
         <AreaListas />

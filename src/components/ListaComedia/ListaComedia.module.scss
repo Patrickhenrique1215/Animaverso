@@ -1,6 +1,10 @@
 
 @use "../../index" as *;
 
+.scrollBtn{
+   @include btncards;
+}
+
 .listaComedia{
     @include listas;
 }
