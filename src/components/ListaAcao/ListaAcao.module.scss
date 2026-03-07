@@ -1,9 +1,13 @@
 @use "../../index" as *;
 
 .scrollBtn{
-   @include btncards;
+   @include btncards
 }
 
 .listaAcao{
-    @include listas;
+    @include listas
+}
+
+.modalOverlay{
+    @include ModalDetails
 }

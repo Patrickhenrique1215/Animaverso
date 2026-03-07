@@ -218,3 +218,239 @@ html, body{
 
 
 }
+
+@mixin ModalDetails{
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.7);
+  z-index: 1000;
+  display: flex;
+  justify-content: center;
+
+  .modal{  
+  margin-top: 10%;
+  width: 85%;
+  background: #141414; 
+  color: white;
+  border: 1px solid white;
+  border-radius: 0.6rem;
+  overflow-y: auto;
+  z-index: 1000;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.8);
+
+  @media(min-width: 992px){
+    margin-top: 3%;
+    width: 60%;
+  }
+
+  .topo {
+    position: relative;
+    width: 100%;
+    border-radius: 0.6rem;
+    overflow: hidden;
+    background-position: center;
+    background-size: cover;
+
+    // Força a altura a acompanhar a proporção da imagem
+    height: 0;
+    padding-top: 56.25%; // 16:9; mude se quiser outra proporção
+
+    .imgInvisivel {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      visibility: hidden;
+    }
+
+   .closeBtn{
+    position: absolute;
+    top: 0;
+    right: 0;
+    background: black;
+    border: 1px solid transparent;
+    color: white;
+    font-size: 2.3rem;
+    padding: 0.2rem 1.1rem;
+    cursor: pointer;
+
+    &:hover{
+      border: 1px solid white;
+    }
+
+    }
+
+    .titleEButtons {
+      position: absolute;
+      left: 1rem;
+      bottom: 0;
+      color: white;
+      text-shadow: 6px 6px 10px rgba(0, 0, 0, 1);
+
+      > h5 {
+        font-size: 1.5rem;
+        margin: 0 0 0.5rem 0;
+      }
+
+      > p {
+        margin: 0 0 1rem 0;
+        font-size: 1rem;
+        color: yellow;
+
+      }
+
+      > button {
+        margin-right: 0.5rem;
+        padding: 0.6rem 1.2rem;
+        border: none;
+        border-radius: 0.3rem;
+        font-size: 0.9rem;
+        cursor: pointer;
+      }
+
+      .buttonAssistir {
+        background-color: #e50914;
+        color: white;
+        border: 1px solid transparent;
+
+        &:hover{
+          background-color: #a7020a;
+          border: 1px solid white;
+        }
+      }
+
+      .buttonContinuar {
+        background-color: rgba(0, 0, 0, 0.6);
+        color: white;
+        border: 1px solid rgba(255, 255, 255, 0.4);
+
+        &:hover{
+          border: 1px solid white;
+        }
+      }
+
+      .addMyLista {
+        background-color: rgba(0, 0, 0, 0.6);
+        color: white;
+        border: 1px solid rgba(255, 255, 255, 0.4);
+        
+
+        &:hover{
+          border: 1px solid white;
+        }
+      }
+    }
+  }
+
+  .sinopse{
+    padding: 1rem;
+
+    > h6{
+      font-size: 1.1rem;
+    }
+
+    > p{
+      font-size: 0.7rem;
+    }
+  }
+
+  .infosMidia{
+    display: flex;
+    gap: 2rem;
+    padding: 1rem;
+
+    @media(min-width: 992px){
+      gap: 0;
+    }
+
+    > div{
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+
+      @media(min-width: 992px){
+        width: 50%;
+      }
+
+      > p{
+        font-size: 0.9rem;
+      }
+    }
+  }
+
+  .imagensMidia{
+    display: flex;
+    gap: 0.5rem;
+    padding: 1rem;
+  }
+
+  .episodios{
+    padding: 1rem;
+
+    > form > select{
+      padding: 0.5rem;
+      border: none;
+      font-size: 1.1rem;
+      cursor: pointer;
+    }
+
+    > h6{
+      margin: 1.6rem 0;
+      font-size: 1.4rem;
+    }
+
+    .cadaEpisodio{
+      display: flex;
+      height: 4rem;
+      padding-top: 0.5rem;
+      padding-bottom: 0.5rem;
+      margin-bottom: 1.5rem;
+      border: 1px solid transparent;
+      border-bottom: 1px solid gray;
+      cursor: pointer;
+      transition: 0.5s ease;
+
+      &:hover{
+        background-color: #313131;
+      }
+
+      .nEpisodio{
+        width: 10%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .caixaImagem{
+        width: 25%;
+        overflow: hidden;
+        aspect-ratio: 16 / 10;
+
+        > img{
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+          object-position: center;
+         
+        }
+      }
+
+      .textoEp{
+        width: 65%;
+        padding-left: 0.3rem;
+        overflow: hidden;
+        text-overflow: ellipsis;
+
+        > h6{
+          font-size: 0.8rem;
+        }
+
+        > p{
+          font-size: 0.6rem;
+        }
+      }
+    }
+  }
+  }
+}

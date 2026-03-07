@@ -3,7 +3,6 @@ import Header from "./components/Header";
 import AreaListas from "./components/AreaListas";
 import Footer from "./components/Footer";
 import ResultadosBusca from "./components/ResultadosBusca";
-import ModalDetalhes from "./components/ModalDetalhes";
 
 function App() {
   const [busca, setBusca] = useState("");
@@ -21,9 +20,6 @@ function App() {
       ) : (
         <AreaListas />
       )}
-
-      <ModalDetalhes/>
-
       <Footer />
     </div>
   );
