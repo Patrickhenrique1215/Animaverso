@@ -24,11 +24,14 @@
     }
 
     .areaCardsPesquisados{
-        display: flex;
-        flex-wrap: wrap;
-        gap: 1rem;
-
         @include listas;
+
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+
+        @media (min-width: 768px){
+            grid-template-columns: repeat(6, 1fr);
+        }
     }
 
 }
@@ -40,4 +43,8 @@
     @media(min-width: 992px){
         font-size: 3rem;
     }
+}
+
+.modalOverlay{
+    @include ModalDetails
 }

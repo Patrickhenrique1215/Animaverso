@@ -26,7 +26,11 @@
     .ul1{
         border: 1px solid rgba(164, 164, 175, 0.5);
         border-radius: 0.4rem;
-        padding: 0 0.5rem;
+        padding: 0;
+
+        &:hover{
+            border: 1px solid white;
+        }
 
         @media(min-width: 768px){
             margin-left: auto;
@@ -40,11 +44,11 @@
             a{
                 color: white;
                 user-select: none;
-                transition: transform 0.3s ease;
-
-                &:hover{
-                    transform: scale(1.1);
-                }
+                margin: 0;
+                display: flex;
+                align-items: center;
+                padding: 0 0.5rem;
+                
             }
 
             svg{
@@ -56,33 +60,38 @@
                 display: flex;
                 justify-content: space-between;
                 gap: 1.5rem;
+                padding: 4% 6%;
                 position: absolute;
                 left: 20px;
                 right: 20px;
-                top: 58px;
+                top: 60px;
                 background: 
                     linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)),
                     url("/back.png");
                 background-size: cover;
                 background-position: center;
                 max-height: 0;
-                overflow: hidden;
-                visibility: hidden;    
+                overflow: hidden;   
+                max-height: 89vh;
                 transition: max-height 0.8s ease;
                 border: 5px solid black;
+                z-index: 1000;
+                
 
                 @media(min-width:768px){
                     left: 45vw;
                     right: auto;
-                    top: 62px;
+                    top: 64px;
                     width: 35vw;  
                     gap: 2rem;  
+                    padding-top: 0.2rem;
                 }
                 
                 .sectionDropdown{
                     display: flex;
                     flex-direction: column;
                     gap: 0.5rem;
+                    
 
                     h4{
                         color: white;
@@ -95,8 +104,11 @@
                         display: flex;
                         align-items: center;
                         user-select: none;
-                        background-color: black;
-                        
+                        background-color: black; 
+                    }
+
+                    .titleGen{
+                        padding-right: 4rem;
                     }
 
                     .ul3{
@@ -107,27 +119,24 @@
 
                         li{
                             border-bottom: 1px solid rgba(225, 220, 220, 0.4);
-                            transition: transform 0.3s ease;
+                            transition: transform 0.9s ease;
 
                             &:hover{
-                                transform: scale(1.05);
+                                transform: scale(1.01);
                                 border-bottom: 1px solid rgba(225,220,220, 1);
                                 box-shadow: -1px -1px 1px white;
+                                padding: 4% 10%;
                             }
                             
                             a{
                                 color: #e8e9f0;
                                 font-size: 1.2rem;
+                                display: block;
                             }
                         }
                         
                     }
                 }    
-            }
-
-            &:hover .dropdownContent{
-                max-height: 800px;
-                visibility: visible;
             }
         }
     }
@@ -157,4 +166,3 @@
     }
 
 }
-

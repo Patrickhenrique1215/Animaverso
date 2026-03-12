@@ -6,43 +6,47 @@ const API_KEY = "d8d845616ef648907b00e45d63d0584f";
 const BASE_URL = "https://api.themoviedb.org/3";
 
 function ListaAcao() {
+
+  //States
   const [animacoesAcao, setAnimacoesAcao] = useState([]);
   const [loading, setLoading] = useState(true);
-  const containerRef = useRef(null);
   const [canScrollLeft, setCanScrollLeft] = useState(false);
   const [modalAberto, setModalAberto] = useState(false);
   const [itemSelecionado, setItemSelecionado] = useState(null);
   const [detalhesModal, setDetalhesModal] = useState(null);
 
+  //Refs
+  const containerRef = useRef(null);
+
   // Função para formatar duração
   const formatarDuracao = (detalhes) => {
-  if (!detalhes) return 'Carregando...';
-  
-  if (detalhes.runtime) {
-    return `${detalhes.runtime} min`;
-  } else if (detalhes.episode_run_time?.[0]) {
-    return `${detalhes.episode_run_time[0]} min/ep`;
-  }
-  return 'N/D';
-};
-
-
-  const getNomeIdioma = (codigo) => {
-  if (!codigo) return 'N/D'; // ← Proteção contra undefined/null
-  
-  const idiomas = {
-    'en': 'Inglês',
-    'pt': 'Português', 
-    'es': 'Espanhol',
-    'fr': 'Francês',
-    'ja': 'Japonês',
-    'ko': 'Coreano'
+    if (!detalhes) return 'Carregando...';
+    
+    if (detalhes.runtime) {
+      return `${detalhes.runtime} min`;
+    } else if (detalhes.episode_run_time?.[0]) {
+      return `${detalhes.episode_run_time[0]} min/ep`;
+    }
+    return 'N/D';
   };
-  return idiomas[codigo] || codigo.toUpperCase();
-};
+
+  //Função pra formatar idiomas
+  const getNomeIdioma = (codigo) => {
+    if (!codigo) return 'N/D'; // ← Proteção contra undefined/null
+    
+    const idiomas = {
+      'en': 'Inglês',
+      'pt': 'Português', 
+      'es': 'Espanhol',
+      'fr': 'Francês',
+      'ja': 'Japonês',
+      'ko': 'Coreano'
+    };
+    return idiomas[codigo] || codigo.toUpperCase();
+  };
 
 
-  // Traduz status para PT-BR
+  // Função pra traduzir status
   const getStatusTraduzido = (status) => {
     const traducoes = {
       'Released': 'Lançado',
@@ -54,45 +58,6 @@ function ListaAcao() {
     };
     return traducoes[status] || status;
   };
-
-  // Uso:
-  <p>STATUS: {getStatusTraduzido(detalhesModal?.status)}</p>
-
-
-  // Novo useEffect para carregar detalhes
-  useEffect(() => {
-  if (itemSelecionado) {
-    const fetchTudo = async () => {
-      // Detalhes principais
-      const detalhesUrl = itemSelecionado.title 
-        ? `${BASE_URL}/movie/${itemSelecionado.id}`
-        : `${BASE_URL}/tv/${itemSelecionado.id}`;
-      
-      const [detalhesRes, ratingRes] = await Promise.all([
-        fetch(`${detalhesUrl}?api_key=${API_KEY}&language=pt-BR`),
-        fetch(`${detalhesUrl}/${
-          itemSelecionado.title ? 'release_dates' : 'content_ratings'
-        }?api_key=${API_KEY}`)
-      ]);
-      
-      const detalhes = await detalhesRes.json();
-      const ratingData = await ratingRes.json();
-      
-      // Pega classificação BR
-      const classificacaoBR = ratingData.results?.find(r => 
-        r.iso_3166_1 === 'BR'
-      )?.certification || ratingData.results?.find(r => 
-        r.iso_3166_1 === 'BR'
-      )?.rating || 'Classificação indicativa não informada';
-      
-      setDetalhesModal({ ...detalhes, classificacao: classificacaoBR });
-    };
-    fetchTudo();
-  }
-}, [itemSelecionado]);
-
-
-
 
   //Função para abrir modal
   const abrirModal = (item) => {
@@ -106,6 +71,16 @@ function ListaAcao() {
     setModalAberto(false);
   }
 
+  // Função para verificar a posição do scroll
+  const checkScroll = () => {
+    if (containerRef.current) {
+      // Se scrollLeft > 0, significa que o usuário já moveu a lista
+      setCanScrollLeft(containerRef.current.scrollLeft > 0);
+    }
+  };
+
+  
+  //useEffect para bloquear scroll do body quando modal abre
   useEffect(() => {
     if (itemSelecionado) {
       document.body.style.overflow = 'hidden';
@@ -115,14 +90,8 @@ function ListaAcao() {
     return () => { document.body.style.overflow = ''; };
   }, [itemSelecionado]);
 
-  // Função para verificar a posição do scroll
-  const checkScroll = () => {
-    if (containerRef.current) {
-      // Se scrollLeft > 0, significa que o usuário já moveu a lista
-      setCanScrollLeft(containerRef.current.scrollLeft > 0);
-    }
-  };
-
+  
+  //useEffect para esconder e mostrar a seta à esquerda 
   useEffect(() => {
     const container = containerRef.current;
     if (container) {
@@ -135,6 +104,8 @@ function ListaAcao() {
     }
   }, []);
 
+
+  //useEffect para buscar animações de AÇÃO
   useEffect(() => {
     const fetchAnimacoesAcao = async () => {
       try {
@@ -151,7 +122,6 @@ function ListaAcao() {
         const filmes = await filmesRes.json();
         const series = await seriesRes.json();
 
-        // Junta e pega top 20 mais populares
         const todasAnimacoesAcao = [
           ...filmes.results,
           ...series.results
@@ -168,10 +138,47 @@ function ListaAcao() {
     fetchAnimacoesAcao();
   }, []);
 
+
+  // useEffect para carregar detalhes do card selecionado
+  useEffect(() => {
+    if (itemSelecionado) {
+      const fetchTudo = async () => {
+        // Detalhes principais
+        const detalhesUrl = itemSelecionado.title 
+          ? `${BASE_URL}/movie/${itemSelecionado.id}`
+          : `${BASE_URL}/tv/${itemSelecionado.id}`;
+        
+        const [detalhesRes, ratingRes] = await Promise.all([
+          fetch(`${detalhesUrl}?api_key=${API_KEY}&language=pt-BR&append_to_response=credits,images`),
+          fetch(`${detalhesUrl}/${
+            itemSelecionado.title ? 'release_dates' : 'content_ratings'
+          }?api_key=${API_KEY}`)
+        ]);
+        
+        const detalhes = await detalhesRes.json();
+        const ratingData = await ratingRes.json();
+        
+        // Pega classificação BR
+        const classificacaoBR = ratingData.results?.find(r => 
+          r.iso_3166_1 === 'BR'
+        )?.certification || ratingData.results?.find(r => 
+          r.iso_3166_1 === 'BR'
+        )?.rating || 'Classificação indicativa não informada';
+        
+        setDetalhesModal({ ...detalhes, classificacao: classificacaoBR });
+      };
+      fetchTudo();
+    }
+  }, [itemSelecionado]);
+
+
+  //Render condicional
   if (loading) {
     return <section className={styles.listaAcao}>Carregando...</section>;
   }
 
+
+  //Return
   return (
     <>
     {canScrollLeft && ( <button className={`${styles.scrollBtn} ${styles.left}`}  onClick={() => scrollList(containerRef.current,-1)}>◀</button>)}
@@ -232,12 +239,22 @@ function ListaAcao() {
             </div>
             <div>
                 <p>Gêneros: {detalhesModal?.genres?.map(g => g.name).join(', ')}</p>
-                <p>Elenco: </p>
-                <p>Diretor: </p>
-                <p>Produtoras: </p>
+                <p>Elenco: {detalhesModal?.credits?.cast?.slice(0,5).map(a => a.name).join(', ')}</p>
+                <p>Diretor: {detalhesModal?.credits?.crew?.filter(p => p.job === "Director").map(d => d.name).join(', ')}</p>
+                <p>Produtoras: {detalhesModal?.production_companies?.map(p => p.name).join(', ')}</p>
             </div>
         </div>
-        <div className={styles.imagensMidia}></div>
+        <div className={styles.imagensMidia}>
+          {detalhesModal?.images?.backdrops?.slice(0,8).map(img => (
+            <img
+              key={img.file_path}
+              src={`https://image.tmdb.org/t/p/w780${img.file_path}`}
+              alt="Cena"
+            />
+          ))}
+        </div>
+
+        {/*}
         <div className={styles.episodios}>
             <form>
                 <select>
@@ -253,7 +270,7 @@ function ListaAcao() {
                     <p>Sinopse do episodio</p>
                 </div>
             </div>
-        </div>
+        </div>*/}
       </div>
       </div>
     )}
